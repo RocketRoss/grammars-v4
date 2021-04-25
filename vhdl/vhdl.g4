@@ -331,6 +331,7 @@ block_declarative_item
   | subnature_declaration
   | quantity_declaration
   | terminal_declaration
+  | package_instantiation
   ;
 
 block_declarative_part
@@ -1049,6 +1050,7 @@ package_body_declarative_part
 
 package_declaration
   : PACKAGE identifier IS
+    ( generic_clause )?
     package_declarative_part
     END ( PACKAGE )? ( identifier )? SEMI
   ;
@@ -1081,6 +1083,11 @@ package_declarative_part
 
 parameter_specification
   : identifier IN discrete_range
+  ;
+
+package_instantiation
+  : PACKAGE identifier IS NEW identifier
+    generic_map_aspect SEMI
   ;
 
 physical_literal
